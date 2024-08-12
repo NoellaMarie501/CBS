@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  app:
+    build: .
+    ports:
+      - "9001:9000"
+    expose:
+      - "9001"
+    depends_on: 
+      - cbsd
+    links:
+      - cbsd
+    volumes:
+      - ".:/cbs"
+    env_file:
+      - variables.env
+  cbsd: 
+    image: mysql
+    expose:
+      - "3306"
+    ports:
+      - "2533:3306"
+  
